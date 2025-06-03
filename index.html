@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kiosk Video Loop</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <video id="videoPlayer" controls autoplay muted></video>
+
+  <script>
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoList = [
+      'video 1.mp4',
+      'video 2.mp4',
+      'video 3.mp4'
+    ];
+    let currentIndex = 0;
+
+    function playNextVideo() {
+      videoPlayer.src = videoList[currentIndex];
+      videoPlayer.play();
+      currentIndex = (currentIndex + 1) % videoList.length;
+    }
+
+    videoPlayer.addEventListener('ended', playNextVideo);
+
+    // Start with the first video immediately
+    window.onload = () => {
+      playNextVideo();
+    };
+  </script>
+</body>
+</html>
